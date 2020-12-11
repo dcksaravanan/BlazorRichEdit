@@ -1,16 +1,16 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime;
-<div id='rich-container' style="width: 100%; height: 900px"></div>
-
+@using BlazorRichEdit.Data
 <DxPopup HeaderText="Header"
          @bind-Visible="@PopupVisible">
     <Content>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel nisi blandit tincidunt vel efficitur purus.
-            Nunc nec turpis tempus, accumsan orci auctor, imperdiet mauris. Fusce id purus magna.
-        </p>
+        <DxListBox Data="@DataSource"
+                   TextFieldName="@nameof(Macro.Name)"
+                   @bind-Values="@Values"
+                   style="height: 232px;">
+        </DxListBox>
     </Content>
 </DxPopup>
-
+<div id='rich-container' style="width: 100%; height: 900px"></div>
 @code {
 }

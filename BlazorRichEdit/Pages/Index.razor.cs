@@ -1,5 +1,7 @@
-﻿using Microsoft.JSInterop;
+﻿using BlazorRichEdit.Data;
+using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,23 +25,23 @@ namespace BlazorRichEdit.Pages
                 + "mczIyXGNmMFxjczEgRG9jdW1lbnQgdGV4dH1cZnMyMlxjZjBccGFyfQ==";
 
                 await JSRuntime.InvokeVoidAsync("createRichEdit", "api/RichEdit/SaveDocument", documentAsBase64);
+                await SendDotNetInstanceToJS();
             }
-        }
-        protected override async Task OnInitializedAsync()
-        {
-            await SendDotNetInstanceToJS();
-            await base.OnInitializedAsync();
         }
         private async Task SendDotNetInstanceToJS()
         {
             var dotNetObjRef = DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("jsFunctions.sendDotNetInstanceToJS", dotNetObjRef);
+            await JSRuntime.InvokeVoidAsync("sendDotNetInstanceToJS", dotNetObjRef);
         }
         [JSInvokable("ShowMacroList")]
         public Task ShowMacroList()
         {
             PopupVisible = true;
+            StateHasChanged();
             return null;
         }
+        IEnumerable<Macro> Values { get; set; }
+        List<Macro> DataSource { get; set; } = new List<Macro>() { new Macro() { Name = "Macro 1" }, new Macro() { Name = "Macro 2" }, new Macro() { Name = "Macro 3" }, new Macro() { Name = "Macro 4" } };
     }
+
 }

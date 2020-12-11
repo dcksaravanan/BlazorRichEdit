@@ -34,11 +34,11 @@ function onHyperLinkClicked(s, e) {
 function onCustomCommandExecuted(s, e) {
     switch (e.commandName) {
         case insertMacroItemId:
-            dotnetRef.invokeMethodAsync('BlazorRichEdit', 'ShowMacroList');
+            dotnetRef.invokeMethodAsync('ShowMacroList');
             break;
     }
 }
 var dotnetRef;
-jsFunctions.sendDotNetInstanceToJS = function (dotNetObjRef) {
+window.sendDotNetInstanceToJS = function (dotNetObjRef) {
     dotnetRef = dotNetObjRef;
 }
