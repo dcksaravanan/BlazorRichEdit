@@ -34,8 +34,11 @@ function onHyperLinkClicked(s, e) {
 function onCustomCommandExecuted(s, e) {
     switch (e.commandName) {
         case insertMacroItemId:
-            var selectedText = s.selection.activeSubDocument.getText(s.selection.intervals[0]);
-            window.open("https://www.google.com/search?q=" + selectedText, "_blank");
+            dotnetRef.invokeMethodAsync('BlazorRichEdit', 'ShowMacroList');
             break;
     }
+}
+var dotnetRef;
+jsFunctions.sendDotNetInstanceToJS = function (dotNetObjRef) {
+    dotnetRef = dotNetObjRef;
 }
